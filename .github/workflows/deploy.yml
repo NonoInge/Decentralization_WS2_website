@@ -1,0 +1,21 @@
+name: Deploy to IPFS via Pinata
+
+on:
+  push:
+    branches:
+      - main  # Déploie le site à chaque push sur la branche "main"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to IPFS via Pinata
+        uses: popovoleksandr/ipfs-pinata-deploy-action@v1.6.3
+        with:
+          path: './'  # Chemin du dossier contenant les fichiers du site
+          pin-name: 'Mon Site Décentralisé'
+          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
+          pinata-secret-api-key: ${{ secrets.PINATA_SECRET_API_KEY }}
